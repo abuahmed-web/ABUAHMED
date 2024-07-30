@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفعيل القالب</title>
+    <style>
+        .NoneSafe {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: rgb(65 105 181 / 20%);
+        }
+        .NoneSafe > div {
+            padding: 20px;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 10px;
+            background: #fff;
+        }
+        .NoneSafe a {
+            font-weight: 700;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .NoneSafe a:hover {
+            text-decoration: underline;
+        }
+        .NoneSafe p {
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $.ajaxSetup({
+            'cache': false
+        });
+        var blog_id = '';
+        
+        $.ajax({
+            'dataType': "json",
+            'url': "/feeds/posts/summary?max-results=0&alt=json",
+            'method': "GET",
+            'success': function (cv) {
+                blog_id = /blog-(.*)/gm.exec(cv.feed.id.$t)[1];
+                $.ajax({
+                    'dataType': "json",
+                    'url': "https://control-panel.abuahmed-web.com/check_activation_by_id.php?blog_id=" + blog_id,
+                    'method': "GET",
+                    'success': function (cw) {
+                        if (cw.success && cw.status === "مفعل") {
+                            console.log("القالب مفعل");
+                        } else {
+                            document.body.innerHTML = `
+                                <div class='NoneSafe'>
+                                    <div>
+                                        <p>القالب غير مفعل الرجاء التواصل معنا لتفعيله</p>
+                                        <a href='https://fb.com/mahmoud.saqr.944' target="_blank">أحمد ويب</a>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    },
+                    'error': function () {
+                        document.body.innerHTML = `
+                            <div class='NoneSafe'>
+                                <div>
+                                    <p>القالب غير مفعل الرجاء التواصل معنا لتفعيله</p>
+                                    <a href='https://fb.com/mahmoud.saqr.944' target="_blank">أحمد ويب</a>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+            },
+            'error': function () {
+                console.error("Failed to retrieve blog ID.");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفعيل القالب</title>
+    <style>
+        .NoneSafe {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: rgb(65 105 181 / 20%);
+        }
+        .NoneSafe > div {
+            padding: 20px;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 10px;
+            background: #fff;
+        }
+        .NoneSafe a {
+            font-weight: 700;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .NoneSafe a:hover {
+            text-decoration: underline;
+        }
+        .NoneSafe p {
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $.ajaxSetup({
+            'cache': false
+        });
+        var blog_id = '';
+        
+        $.ajax({
+            'dataType': "json",
+            'url': "/feeds/posts/summary?max-results=0&alt=json",
+            'method': "GET",
+            'success': function (cv) {
+                blog_id = /blog-(.*)/gm.exec(cv.feed.id.$t)[1];
+                $.ajax({
+                    'dataType': "json",
+                    'url': "https://control-panel.abuahmed-web.com/domain-id/check_activation_by_id.php?blog_id=" + blog_id,
+                    'method': "GET",
+                    'success': function (cw) {
+                        if (cw.success && cw.status === "مفعل") {
+                            console.log("القالب مفعل");
+                        } else {
+                            document.body.innerHTML = `
+                               <style>
+                        .NoneSafe>div a { font-weight: 700; }
+                        .NoneSafe>div * { color: #222; }
+                        .NoneSafe>div { background: rgb(65 105 181 / 20%); padding: 20px; text-align: center; font-size: 16px; border-radius: 10px; }
+                        .NoneSafe { display: flex; justify-content: center; align-items: center; position: fixed; left: 0; right: 0; top: 0; bottom: 0; }
+                    </style>
+                    <div class='NoneSafe'>
+                        <div class='NotSafe'>
+                            <p>القالب غير مفعل، الرجاء التواصل معنا لتفعيله</p>
+                            <a href='https://fb.com/mahmoud.saqr.944' target="_blank">أحمد ويب</a>
+                        </div>
+                    </div>
+                            `;
+                        }
+                    },
+                    'error': function () {
+                       
+                    }
+                });
+            },
+            'error': function () {
+                console.error("Failed to retrieve blog ID.");
+            }
+        });
+    </script>
+</body>
+</html>

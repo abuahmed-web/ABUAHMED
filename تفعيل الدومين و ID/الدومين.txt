@@ -1,0 +1,46 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script id='MA'>/*<![CDATA[*/
+$.ajaxSetup({ cache: false });
+
+function checkActivationByDomain() {
+    var domain = window.location.hostname; // الحصول على الدومين من النافذة
+
+    $.ajax({
+        dataType: 'json',
+        url: `https://control-panel.abuahmed-web.com/check_activation_by_domain.php?domain=${encodeURIComponent(domain)}&timestamp=${new Date().getTime()}`,
+        method: "GET",
+        success: function (response) {
+            if (response.success && response.status === 'مفعل') {
+                // القالب مفعل
+                console.log('القالب مفعل');
+            } else {
+                console.log('القالب غير مفعل');
+                document.body.innerHTML = `
+                    <style>
+                        .NoneSafe>div a { font-weight: 700; }
+                        .NoneSafe>div * { color: #222; }
+                        .NoneSafe>div { background: rgb(65 105 181 / 20%); padding: 20px; text-align: center; font-size: 16px; border-radius: 10px; }
+                        .NoneSafe { display: flex; justify-content: center; align-items: center; position: fixed; left: 0; right: 0; top: 0; bottom: 0; }
+                    </style>
+                    <div class='NoneSafe'>
+                        <div class='NotSafe'>
+                            <p>القالب غير مفعل، الرجاء التواصل معنا لتفعيله</p>
+                            <a href='https://fb.com/mahmoud.saqr.944' target="_blank">أحمد ويب</a>
+                        </div>
+                    </div>
+                `;
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error('خطأ في الطلب:', textStatus, errorThrown);
+        }
+    });
+}
+
+// عند تحميل الصفحة، تحقق من التفعيل بناءً على الدومين
+$(document).ready(function() {
+    checkActivationByDomain();
+});
+/*]]>*/
+</script>
